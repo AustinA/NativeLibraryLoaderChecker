@@ -1,8 +1,23 @@
-# NativeLibraryLoaderChecker
-A custom gradle task that takes a native library and determines if it can be loaded successfully
+plugins {
+    id 'java'
+}
 
-### Example
-```
+group 'me.duhblea.NativeLibraryLoaderChecker'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 import me.duhblea.nativelibraryloaderchecker.NativeLibraryLoaderChecker
 task validateDeployedTenaLibraries(type: NativeLibraryLoaderChecker) {
 
@@ -11,8 +26,7 @@ task validateDeployedTenaLibraries(type: NativeLibraryLoaderChecker) {
 
     // Add additional search paths for native libraries and their dependencies
     additionalSearchPaths.add("some-path-to-library".toString())
-    
+
     // Libraries to search for, without pathing or file suffix
     librariesToCheck.add("some-library-name-v1.0")
 }
-```
